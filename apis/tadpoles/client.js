@@ -6,19 +6,6 @@
     let unirest = require('unirest');
     let querystring = require('querystring');
     const domain = 'https://www.tadpoles.com';
-
-    function getDefaultHeaders(formData){
-        let contentLength = formData.length;
-        return { 
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "Accept-Content": "application/x-www-form-urlencoded",
-                    "Accept-Encoding": "identity",
-                    "X-Titanium-Id": "e59d2869-fb2e-4ec5-abfe-ec3a3f006eea",
-                    "X-Requested-Wi": "XMLHttpRequest",
-                    "Content-Length": contentLength.toString()
-                };
-    }
-
     
     /**
      * Validates a token from the bright horizons client
@@ -80,6 +67,52 @@
                 onValidate(extractCookie(response));
         });
     };
+
+    /**
+     * Get details about your child for further posts
+     *
+     * @example
+     * let client = require('./apis/tadpoles/client');
+     * let result = client.getChildDetails('cookie', onRetrieval);
+     */
+    exports.getChildDetails = (cookie, onRetrieval) => {
+        let headers = getDefaultHeaders();
+        unirest.get(domain + '/remote/v1/parameters?include_all_kids=true&include_guardians=True')
+            .headers(headers)
+            .jar(buildCookieJar(cookie))
+            .end(function (response) {
+                if (response.status !== 200){
+                    console.error(`Unable to get valid response: ${response.status} ${response.body}`);
+                }
+                let parsed = JSON.parse(response.body);
+                onRetrieval(cookie, parsed);
+        });
+    };
+
+    /**
+     * Log a report about your child
+     *
+     * @example
+     * let client = require('./apis/tadpoles/client');
+     * let result = client.logReport('cookie', childDetails);
+     */
+    exports.logReport = (cookie, childDetails) => {
+        let headers = getDefaultHeaders();
+    };
+
+    function getDefaultHeaders(formData){
+        let headers = { 
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Accept-Content": "application/x-www-form-urlencoded",
+                    "Accept-Encoding": "identity",
+                    "X-Titanium-Id": "e59d2869-fb2e-4ec5-abfe-ec3a3f006eea",
+                    "X-Requested-Wi": "XMLHttpRequest"
+                };
+        if (formData){
+            headers['Content-Length'] = formData.length.toString();
+        }
+        return headers;
+    }
 
     function extractCookie(response){
         let cookie = response.headers['set-cookie'][0];
