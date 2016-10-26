@@ -1,10 +1,10 @@
 (function () {
-   'use strict';
-   'use esversion6';
-   var exports = module.exports = {};
+    'use strict';
+    
+    let exports = module.exports = {};
 
-    var unirest = require('unirest');
-    var querystring = require('querystring');
+    let unirest = require('unirest');
+    let querystring = require('querystring');
    
     /**
      * Bright Horizons API
@@ -15,15 +15,15 @@
      * var client = require('./apis/brighthorizons/client');
      * var result = client.login('username', 'password');
      */
-    exports.login = function (username, password){
-        var token;
-        var form = {
+    exports.login = function (username, password, validate){
+        let token;
+        let form = {
                     "username": username ,
                     "password": password ,
                     "response": "jwt"
                    };
-        var formData = querystring.stringify(form);
-        var contentLength = formData.length;
+        let formData = querystring.stringify(form);
+        let contentLength = formData.length;
         unirest.post('https://familyinfocenter.brighthorizons.com/mybrightday/login')
             .headers({ 
                         "Content-Type": "application/x-www-form-urlencoded",
@@ -39,8 +39,7 @@
                     console.error(`Unable to get valid response: ${response.status} ${response.body}`);
                 }
                 token = response.body;
-                console.log(response.body);
+                validate(token);
         });
-        return token;
     };   
 }());
