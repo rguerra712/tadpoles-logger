@@ -96,8 +96,19 @@
      * let client = require('./apis/tadpoles/client');
      * let result = client.logReport('cookie', childDetails);
      */
-    exports.logReport = (cookie, childDetails) => {
+    exports.logReport = (cookie, childDetails, log) => {
         let headers = getDefaultHeaders();
+        let logString = JSON.stringify(log);
+        let formData = `daily_report=${encodeURIComponent(logString)}`; 
+        unirest.post(domain + '/remote/v1/daily_report/parent')
+            .headers(headers)
+            .jar(buildCookieJar(cookie))
+            .send(formData)
+            .end(function (response) {
+                if (response.status !== 200){
+                    console.error(`Unable to get valid response: ${response.status} ${response.body}`);
+                }
+        });
     };
 
     function getDefaultHeaders(formData){
