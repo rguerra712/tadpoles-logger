@@ -12,22 +12,24 @@
      *
      * @example
      * let client = require('./apis/tadpoles/client');
-     * let result = client.validateToken('token', onValidate);
+     * let promise = client.validateToken('token');
      */
-    exports.validateToken = (token, onValidate) => {
+    exports.validateToken = (token) => {
         let form = {
                     "token": token
                 };
         let formData = querystring.stringify(form);
         let headers = getDefaultHeaders(formData);
-        unirest.post(domain + '/auth/jwt/validate')
-            .headers(headers)
-            .send(formData)
-            .end(function (response) {
-                if (response.status !== 200){
-                    console.error(`Unable to get valid response: ${response.status} ${response.body}`);
-                }
-                onValidate(extractCookie(response));
+        return new Promise((resolve, reject) => {
+            unirest.post(domain + '/auth/jwt/validate')
+                .headers(headers)
+                .send(formData)
+                .end(function (response) {
+                    if (response.status !== 200){
+                        reject(`Unable to get valid response: ${response.status} ${response.body}`);
+                    }
+                    resolve(extractCookie(response));
+            });
         });
     };
 
@@ -36,9 +38,9 @@
      *
      * @example
      * let client = require('./apis/tadpoles/client');
-     * let result = client.validateLogin('cookie', onValidate);
+     * let promise = client.validateLogin('cookie');
      */
-    exports.validateLogin = (cookie, onValidate) => {
+    exports.validateLogin = (cookie) => {
         let form = {
                 "available_memory": "9915384",
                 "uses_dst":  "true",
@@ -56,15 +58,17 @@
             };
         let formData = querystring.stringify(form);
         let headers = getDefaultHeaders(formData);
-        unirest.post(domain + '/remote/v1/athome/admit')
-            .headers(headers)
-            .jar(buildCookieJar(cookie))
-            .send(formData)
-            .end(function (response) {
-                if (response.status !== 200){
-                    console.error(`Unable to get valid response: ${response.status} ${response.body}`);
-                }
-                onValidate(extractCookie(response));
+        return new Promise((resolve, reject) => {
+            unirest.post(domain + '/remote/v1/athome/admit')
+                .headers(headers)
+                .jar(buildCookieJar(cookie))
+                .send(formData)
+                .end(function (response) {
+                    if (response.status !== 200){
+                        reject(`Unable to get valid response: ${response.status} ${response.body}`);
+                    }
+                    resolve(extractCookie(response));
+            });
         });
     };
 
@@ -73,19 +77,21 @@
      *
      * @example
      * let client = require('./apis/tadpoles/client');
-     * let result = client.getChildDetails('cookie', onRetrieval);
+     * let promise = client.getChildDetails('cookie');
      */
-    exports.getChildDetails = (cookie, onRetrieval) => {
+    exports.getChildDetails = (cookie) => {
         let headers = getDefaultHeaders();
-        unirest.get(domain + '/remote/v1/parameters?include_all_kids=true&include_guardians=True')
+        return new Promise((resolve, reject) => {
+            unirest.get(domain + '/remote/v1/parameters?include_all_kids=true&include_guardians=True')
             .headers(headers)
             .jar(buildCookieJar(cookie))
             .end(function (response) {
                 if (response.status !== 200){
-                    console.error(`Unable to get valid response: ${response.status} ${response.body}`);
+                    reject(`Unable to get valid response: ${response.status} ${response.body}`);
                 }
                 let parsed = JSON.parse(response.body);
-                onRetrieval(cookie, parsed);
+                resolve(parsed);
+            });
         });
     };
 
@@ -94,20 +100,22 @@
      *
      * @example
      * let client = require('./apis/tadpoles/client');
-     * let result = client.logReport('cookie', childDetails);
+     * let promise = client.logReport('cookie', childDetails);
      */
     exports.logReport = (cookie, childDetails, log) => {
         let headers = getDefaultHeaders();
         let logString = JSON.stringify(log);
-        let formData = `daily_report=${encodeURIComponent(logString)}`; 
-        unirest.post(domain + '/remote/v1/daily_report/parent')
-            .headers(headers)
-            .jar(buildCookieJar(cookie))
-            .send(formData)
-            .end(function (response) {
-                if (response.status !== 200){
-                    console.error(`Unable to get valid response: ${response.status} ${response.body}`);
-                }
+        let formData = `daily_report=${encodeURIComponent(logString)}`;
+        return new Promise((resolve, reject) => {
+            unirest.post(domain + '/remote/v1/daily_report/parent')
+                .headers(headers)
+                .jar(buildCookieJar(cookie))
+                .send(formData)
+                .end(function (response) {
+                    if (response.status !== 200){
+                        reject(`Unable to get valid response: ${response.status} ${response.body}`);
+                    }
+            });
         });
     };
 
