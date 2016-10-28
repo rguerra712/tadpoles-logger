@@ -17,7 +17,7 @@
     if (!settings.username && process.env.BRIGHT_HORIZONS_USERNAME){
         settings.username = process.env.BRIGHT_HORIZONS_USERNAME; 
     }
-    if (!settings.password && process.env.BRIGHT_HORIZONS_PASSWORD_USERNAME){
+    if (!settings.password && process.env.BRIGHT_HORIZONS_PASSWORD){
         settings.password = process.env.BRIGHT_HORIZONS_PASSWORD; 
     }
     if (!settings.dashMacAddress && process.env.TADPOLES_DASH_MAC_ADDRESS){

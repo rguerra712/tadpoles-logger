@@ -102,9 +102,9 @@
      * let client = require('./apis/tadpoles/client');
      * let promise = client.logReport('cookie', childDetails);
      */
-    exports.logReport = (cookie, childDetails, log) => {
+    exports.logReport = (cookie, childDetails, logMessage) => {
         let headers = getDefaultHeaders();
-        let logString = JSON.stringify(log);
+        let logString = JSON.stringify(logMessage);
         let formData = `daily_report=${encodeURIComponent(logString)}`;
         return new Promise((resolve, reject) => {
             unirest.post(domain + '/remote/v1/daily_report/parent')

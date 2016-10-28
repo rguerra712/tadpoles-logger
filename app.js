@@ -11,8 +11,11 @@
 
     dash.on("detected", function (){
         console.log("Log added to tadpoles");
-        eventLogger.log(logBuilder.buildSleepLog());
-        eventLogger.log(logBuilder.buildBathroomLog());
-        eventLogger.log(logBuilder.buildFoodLog());
+        let logs = [
+            logBuilder.buildSleepLog(),
+            logBuilder.buildBathroomLog(),
+            logBuilder.buildFoodLog()
+        ];
+        eventLogger.logEvents(logs);
     });
 }());
