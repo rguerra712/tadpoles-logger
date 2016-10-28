@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "command-line-args": "^3.0.1",
+    "dash": "^0.3.0",
     "node-dash-button": "^0.6.1"
   }
 }

@@ -36,8 +36,10 @@
                         })
                 .send(formData)
                 .end(function (response) {
-                    if (response.status !== 200){
-                        reject(`Unable to get valid response: ${response.status} ${response.body}`);
+                    if (response.status === 401){
+                        reject(`Login failed for: ${username} - ${password}`);
+                    } else if (response.status !== 200){
+                        reject(`Unable to get valid response: ${response.status}`);
                     }
                     token = response.body;
                     resolve(token);
