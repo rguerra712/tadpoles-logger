@@ -1,12 +1,12 @@
 (function(){
     
-    const commandLineArgs = require('command-line-args')
+    const commandLineArgs = require('command-line-args');
     const optionDefinitions = [
         { name: 'username', alias: 'u', type: String },
         { name: 'password', alias: 'p', type: String },
         { name: 'mac', alias: 'm', type: String }
     ];
-    const options = commandLineArgs(optionDefinitions)
+    const options = commandLineArgs(optionDefinitions);
 
     let settings = {};
 
@@ -31,5 +31,5 @@
 
     exports.dashSettings = {
         dashMacAddress: settings.dashMacAddress
-    }
+    };
 })();
