@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.7.10",
     "command-line-args": "^3.0.1",
     "dash": "^0.3.0",
     "moment": "^2.15.2",
