@@ -5,6 +5,7 @@
     const config = require('./config/config.js');
     const babyLogger = require('./lib/baby-logger.js');
     const dash_button = require('node-dash-button');
+    const sqs = require('./apis/sqs/client.js');
 
     let dashMac = config.dashSettings.dashMacAddress;
     if (dashMac){
@@ -15,7 +16,7 @@
             babyLogger.log();
         });
     }
-    let awsQueue = config.awsSettings.awsQueue;
+    let awsQueue = config.awsSettings.awsQueueName;
     if (awsQueue){
         sqs.watchForCommand(data => {
             if (data.command && data.command.toLowerCase() === 'daycare'){

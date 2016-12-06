@@ -13,6 +13,7 @@
     "command-line-args": "^3.0.1",
     "dash": "^0.3.0",
     "moment": "^2.15.2",
-    "node-dash-button": "^0.6.1"
+    "node-dash-button": "^0.6.1",
+    "sqs-consumer": "^3.4.0"
   }
 }
