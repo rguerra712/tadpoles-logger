@@ -1,7 +1,6 @@
 (function (){
     'use strict';
     
-    const moment = require('moment');
     const config = require('./config/config.js');
     const babyLogger = require('./lib/baby-logger.js');
     const dash_button = require('node-dash-button');
@@ -13,14 +12,14 @@
         let lastEntryTime;
 
         dash.on("detected", function (){
-            babyLogger.log();
+            babyLogger.log(lastEntryTime);
         });
     }
     let awsQueue = config.awsSettings.awsQueueName;
     if (awsQueue){
         sqs.watchForCommand(data => {
             if (data.command && data.command.toLowerCase() === 'daycare'){
-                babyLogger.log();
+               babyLogger.log();
             }
         });
     }
