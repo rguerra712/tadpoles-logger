@@ -8,7 +8,8 @@
         { name: 'awsQueueName', alias: 'q', type: String },
         { name: 'username', alias: 'u', type: String },
         { name: 'password', alias: 'p', type: String },
-        { name: 'mac', alias: 'm', type: String }
+        { name: 'mac', alias: 'm', type: String },
+        { name: 'onetime', alias: 'o', type: Boolean }
     ];
     const options = commandLineArgs(optionDefinitions);
 
@@ -40,6 +41,10 @@
         settings.awsQueueName = process.env.AWS_MAKER_SQS_QUEUE_NAME; 
     }
 
+    if (!settings.oneTime && process.env.TADPOLES_ONE_TIME_SETTING){
+        settings.oneTime = process.env.TADPOLES_ONE_TIME_SETTING; 
+    }
+
     let awsConfig = new AWS.Config();
     awsConfig.update({region: settings.awsRegion});
     
@@ -56,5 +61,9 @@
 
     exports.dashSettings = {
         dashMacAddress: settings.dashMacAddress
+    };
+
+    exports.generalSettings = {
+        oneTime: settings.oneTime
     };
 })();

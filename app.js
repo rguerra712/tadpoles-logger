@@ -24,5 +24,9 @@
         });
     }
 
+    if (config.generalSettings.oneTime){
+        babyLogger.log();
+    }
+
 
 }());
