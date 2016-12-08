@@ -1,13 +1,10 @@
 {
-  "name": "unirest-client",
-  "version": "0.5.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "tadpoles-logger",
+  "version": "0.0.1",
+  "description": "Login your child at a bright horizons school using the tadpoles API",
+  "main": "app.js",
+  "author": "R. Stephen Guerra",
+  "license": "Apache",
   "dependencies": {
     "aws-sdk": "^2.7.10",
     "command-line-args": "^3.0.1",
