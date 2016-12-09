@@ -35,6 +35,6 @@ You will need to pass your Bright Horizons sign-in credentials to any of the ste
 		1. Set the variable AWS_MAKER_SQS_QUEUE_NAME
 1. Additionally you will need to setup the following environment variables
   1. Your AWS_ACCESS_KEY_ID
-	1. Your AWS_SECRET_ACCESS_KEY
+  1. Your AWS_SECRET_ACCESS_KEY
 
 Finally, run the command via the command line `node app.js` followed by any command line arguments above if desired
