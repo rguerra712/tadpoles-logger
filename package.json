@@ -1,8 +1,8 @@
 {
   "name": "tadpoles-logger",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Login your child at a bright horizons school using the tadpoles API",
-  "main": "app.js",
+  "main": "index.js",
   "author": "R. Stephen Guerra",
   "license": "Apache",
   "dependencies": {

@@ -1,7 +1,11 @@
-(function (){
+(function(){
     'use strict';
-    
-    const babyLogger = require('./lib/baby-logger.js');
-    babyLogger.log();
 
-}());
+    let exports = module.exports = {}; 
+
+    const logBuilder = require('./lib/logbuilder');
+    const babyLogger = require('./lib/baby-logger.js');
+    
+    exports.logBuilder = logBuilder;
+    exports.babyLogger = babyLogger;
+})();
