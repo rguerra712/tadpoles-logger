@@ -1,6 +1,6 @@
 {
   "name": "tadpoles-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Login your child at a bright horizons school using the tadpoles API",
   "main": "index.js",
   "author": "R. Stephen Guerra",
