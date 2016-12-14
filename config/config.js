@@ -1,7 +1,6 @@
 (function(){
     
     const commandLineArgs = require('command-line-args');
-    const AWS = require('aws-sdk');
     const optionDefinitions = [
         { name: 'awsUserId', alias: 'a', type: String },
         { name: 'awsRegion', alias: 'r', type: String },
@@ -44,9 +43,6 @@
     if (!settings.oneTime && process.env.TADPOLES_ONE_TIME_SETTING){
         settings.oneTime = process.env.TADPOLES_ONE_TIME_SETTING; 
     }
-
-    let awsConfig = new AWS.Config();
-    awsConfig.update({region: settings.awsRegion});
     
     exports.awsSettings = {
         awsUserId: settings.awsUserId,
