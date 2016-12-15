@@ -15,26 +15,4 @@ You will need to pass your Bright Horizons sign-in credentials to any of the ste
 	1. Setting the enviornment variable `TADPOLES_ONE_TIME_SETTING` to `true`
 	1. Passing in the command line switches `-onetime` or `-o` switches
 
-### Dash button login
-1. Login to your dash button using the "Amazon" App, but **DON'T finish the final step to choose a product**
-1. Follow the steps to find your dash device's MAC Address at ![the node-dash-button github](https://github.com/hortinstein/node-dash-button)
-1. Setup the MAC Addressvariables by either
-	1. Setting the enviornment variable `TADPOLES_DASH_MAC_ADDRESS` to the MAC Address found above
-	1. Passing in the command line switches `-mac` or `-m` switches
-
-### AWS SQS login
-1. First setup your ![SQS Queue if you have not already](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/GettingSetUp.html)
-1. Setup the following required variables from your AWS Queue (these are generally obtained from the SQS url)
-	1. Via Command Line
-    1. Pass in your `-awsUserId` (`-a`)
-		1. Pass in your `-awsRegion` (`-r`)
-		1. Pass in your `-awsQueueName` (`-q`)
-	1. Via Environment Variables
-	  1. Set the variable AWS_USER_ID
-		1. Set the variable AWS_REGION
-		1. Set the variable AWS_MAKER_SQS_QUEUE_NAME
-1. Additionally you will need to setup the following environment variables
-  1. Your AWS_ACCESS_KEY_ID
-  1. Your AWS_SECRET_ACCESS_KEY
-
-Finally, run the command via the command line `node app.js` followed by any command line arguments above if desired
+For further details, see the example located at https://github.com/rguerra712/tadpoles-logger-example

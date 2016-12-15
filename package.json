@@ -1,15 +1,14 @@
 {
   "name": "tadpoles-logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Login your child at a bright horizons school using the tadpoles API",
   "main": "index.js",
   "author": "R. Stephen Guerra",
   "license": "Apache",
   "dependencies": {
     "command-line-args": "^3.0.1",
-    "dash": "^0.3.0",
-    "moment": "^2.15.2",
-    "node-dash-button": "^0.6.1",
-    "sqs-consumer": "^3.4.0"
+    "moment": "^2.17.1",
+    "querystring": "^0.2.0",
+    "unirest": "^0.5.1"
   }
 }
